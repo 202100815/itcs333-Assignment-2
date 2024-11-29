@@ -11,20 +11,24 @@ $data = json_decode($response, true);
 echo $response;
 print_r($response);
 
-//
+// process API response and handle errors 
+
 if(!$data || !isset($data["results"])){
     die('error fetching data from API')
 }
-
 $result = $data["results"];
 
 ?>
+
 <html>
     <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
 </head>
     <body>
+        
+// creating HTML table to display retrieved data
+        
 <table>
     <thead>
 <tr>
@@ -36,11 +40,14 @@ $result = $data["results"];
     <th>Number of students</th>
 </tr>
     </thead>
-    <tbody>
-        <?php
-        foreach($result as $student){
-            ?>
-            <tr>
+
+//generate a table from a PHP array named $result
+    
+<tbody>
+ <?php
+ foreach($result as $student){
+ ?>
+ <tr>
             <td><?php
             echo $student["year"];?></td>
             <td><?php echo $student["Semester"];?></td>
@@ -48,10 +55,10 @@ $result = $data["results"];
            <td><?php  echo $student["Nationality"];?></td>
           <td><?php  echo $student["Colleges"];?></td>
           <td><?php  echo $student["Number of students"];?></td>
-            </tr>
-            <?php
-        }
-        ?>
+  </tr>
+ <?php
+ }
+ ?>
 </tbody>
 
 </table>
